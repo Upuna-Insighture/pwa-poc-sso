@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import colors from '../../app/colors';
+import { storeImageLocally } from '../../localStorage/localStorageUtils';
 
 const ImageUploader = ({ isOpen, onClose }) => {
   const [base64Image, setBase64Image] = useState(null);
@@ -18,26 +19,31 @@ const ImageUploader = ({ isOpen, onClose }) => {
   };
 
   const handleSave = async () => {
-    try {
-      const response = await fetch('http://localhost:4000/uploadImage', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ imageText: base64Image, timestamp: Date.now() }),
-      });
+    if (navigator.onLine) {
+      try {
+        const response = await fetch('http://localhost:4000/uploadImage', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ imageText: base64Image, timestamp: Date.now() }),
+        });
 
-      if (response.ok) {
-        console.log('Image data stored successfully.');
-        navigate(0);
+        if (response.ok) {
+          console.log('Image data stored successfully.');
+          navigate(0);
 
-      } else {
-        console.error('Failed to store image data.');
+        } else {
+          console.error('Failed to store image data.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
       }
-    } catch (error) {
-      console.error('Error:', error);
+      onClose(false);
+    } else {
+      storeImageLocally(base64Image);
+      console.log("No internet. Storing data locally ")
     }
-    onClose(false);
   };
 
   return (
@@ -60,8 +66,8 @@ const ImageUploader = ({ isOpen, onClose }) => {
             )}
           </div>
           <div className="mt-4 flex justify-end">
-            
-          <button
+
+            <button
               className={`px-4 py-2 rounded ${colors.noButton} `}
               onClick={() => onClose(false)}
             >
@@ -73,7 +79,7 @@ const ImageUploader = ({ isOpen, onClose }) => {
             >
               Save
             </button>
-           
+
           </div>
         </div>
       </div>
