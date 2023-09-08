@@ -15,12 +15,14 @@ const ImageUpdater = ({ isOpen, onClose, data }) => {
   };
 
   const handleSave = async () => {
-    fetch('http://localhost:4000/updateImage', {
+    if (navigator.onLine) {
+
+      fetch('http://localhost:4000/updateImage', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ imageText : base64Image, timestamp : data.timestamp }),
+        body: JSON.stringify({ imageText: base64Image, timestamp: data.timestamp }),
       })
         .then((response) => {
           if (response.status === 200) {
@@ -34,7 +36,10 @@ const ImageUpdater = ({ isOpen, onClose, data }) => {
         .catch((error) => {
           console.error('Error:', error);
         });
-    onClose(false);
+      onClose(false);
+    } else {
+      alert("Connection Lost! Try again later!")
+    }
   };
 
   return (

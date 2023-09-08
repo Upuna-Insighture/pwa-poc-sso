@@ -8,6 +8,7 @@ const EditNote = ({ isOpen, onClose, data }) => {
   const navigate = useNavigate();
 
   const handleSave = async () => {
+    if (navigator.onLine) {
     fetch('http://localhost:4000/editNote', {
       method: 'PUT',
       headers: {
@@ -27,6 +28,9 @@ const EditNote = ({ isOpen, onClose, data }) => {
         console.error('Error:', error);
       });
     onClose(false);
+    }else {
+      alert("Connection Lost! Try again later")
+    }
   };
 
   return (
