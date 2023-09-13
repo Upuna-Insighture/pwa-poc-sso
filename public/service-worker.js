@@ -8,12 +8,12 @@ importScripts('https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js'
 //   })
 // );
 
-// workbox.routing.registerRoute(
-//   /\.(?:css|js|jsx|png|jpg|jpeg|gif|svg|ico)$/,
-//   new workbox.strategies.NetworkFirst({
-//     cacheName: 'static-assets',
-//   })
-// );
+workbox.routing.registerRoute(
+  /\.(?:css|js|jsx|png|jpg|jpeg|gif|svg|ico)$/,
+  new workbox.strategies.NetworkFirst({
+    cacheName: 'static-assets',
+  })
+);
 
 const maxSyncTimer = 600000; //10 min
 const SW_VERSION = '1.0.0';

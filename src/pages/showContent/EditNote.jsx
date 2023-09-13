@@ -44,7 +44,7 @@ const EditNote = ({ isOpen, onClose, data }) => {
       <div className="bg-white p-6 rounded-lg shadow-xl z-50 w-96">
         <h2 className="text-2xl text-red-500 mb-4">Edit your note</h2>
         <textarea
-          className="w-full p-2 border rounded"
+          className="w-full h-48 p-2 border rounded"
           value={editedText}
           onChange={(e) => setEditedText(e.target.value)}
         />
