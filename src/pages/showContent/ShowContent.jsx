@@ -30,13 +30,13 @@ const ShowContent = () => {
         <>
             <div>
                 <div className="flex justify-center">
-                    <div className={`${colors.okButton} p-2 px-4 rounded m-2`} onClick={() => { setAddData(true) }}>Add a Note</div>
+                    <div className={`${colors.okButton} p-2 px-4 rounded m-2`} onClick={() => { setAddData(true) }}>Add Note</div>
                 </div>
                 <div className="flex justify-center">
                     {addData ? <AddContent onCancel={setAddData} onSave={setUpdate} /> : ""}
                 </div>
                 <div className="flex items-center justify-center">
-                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10 text-white">
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 2xl:grid-cols-4 gap-10 text-white">
                         {
                             tempData?.map((data, index) => {
                                 return (
@@ -46,6 +46,7 @@ const ShowContent = () => {
                                 )
                             })
                         }
+                        {tempData.length < 1 ? "No Data to show. Add something..." : "sss"}
                     </div>
                 </div>
             </div>

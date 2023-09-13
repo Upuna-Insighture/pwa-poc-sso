@@ -36,8 +36,7 @@ const ImagePage = () => {
     const [uploader, setUploader] = useState(false);
     return (
         <>
-            <div className="flex w-full justify-center gap-10">
-                <div>The Image Section</div>
+            <div className="flex w-full justify-center">
                 <div className={` ${colors.okButton} p-1 w-32 text-center rounded`} onClick={() => { setUploader(true) }}>Add image?</div>
             </div>
 
@@ -45,7 +44,7 @@ const ImagePage = () => {
             <ImageUploader isOpen={uploader} onClose={setUploader} />
 
             <div className="flex items-center justify-center">
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-10 text-white">
+            <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 2xl:grid-cols-4 gap-10 text-white">
             {loading ? "Loading data..." :
                 images?.map((data, index) => {
                     return (

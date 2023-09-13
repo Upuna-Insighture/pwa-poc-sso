@@ -5,9 +5,9 @@ const Network = ({status}) => {
             <div>
                 {
                     status == 'offline' ?
-                        <div className="p-2 text-black rounded bg-amber-400">Offline</div>
+                        <div className="p-2  text-black rounded bg-amber-400">Offline</div>
                         :
-                        <div className="p-2 text-black rounded bg-green-300">Online</div>
+                        <div className="p-2  text-black rounded bg-green-300">Online</div>
                 }
             </div>
         </>
