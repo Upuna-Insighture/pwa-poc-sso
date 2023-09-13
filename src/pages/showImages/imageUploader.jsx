@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom"
 import colors from '../../app/colors';
 import { storeImageLocally } from '../../localStorage/localStorageUtils';
+import { Workbox } from "workbox-window";
 
 const ImageUploader = ({ isOpen, onClose }) => {
   const [base64Image, setBase64Image] = useState(null);
   const navigate = useNavigate();
+  const wb = new Workbox('/service-worker.js');
+  wb.register();
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
@@ -43,6 +46,7 @@ const ImageUploader = ({ isOpen, onClose }) => {
     } else {
       storeImageLocally(base64Image);
       console.log("No internet. Storing data locally ")
+      // const response = await wb.messageSW({type: 'offline'});
     }
   };
 

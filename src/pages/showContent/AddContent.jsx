@@ -1,9 +1,12 @@
 import { useState } from "react"
 import { storeNoteLocally } from "../../localStorage/localStorageUtils";
+import { Workbox } from "workbox-window";
 
 export function AddContent({ onCancel, onSave }) {
   const [text, setText] = useState([]);
   const [popup, setPopup] = useState(false);
+  const wb = new Workbox('/service-worker.js');
+  wb.register();
 
   const handleTextChange = (e) => {
     setText(e.target.value);
@@ -36,8 +39,9 @@ export function AddContent({ onCancel, onSave }) {
       storeNoteLocally({ text });
       console.log("No internet. Storing data locally ")
       onCancel(false)
-      alert("Connection Lost! Storing locally...")
+      // alert("Connection Lost! Storing locally...")
       setPopup(true);
+      // const response = await wb.messageSW({type: 'offline'});
     }
   };
 
