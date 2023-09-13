@@ -39,7 +39,7 @@ export function AddContent({ onCancel, onSave }) {
       storeNoteLocally({ text });
       console.log("No internet. Storing data locally ")
       onCancel(false)
-      // alert("Connection Lost! Storing locally...")
+      alert("Connection Lost! Storing locally...")
       setPopup(true);
       // const response = await wb.messageSW({type: 'offline'});
     }

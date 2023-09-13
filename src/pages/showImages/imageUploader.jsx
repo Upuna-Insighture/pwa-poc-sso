@@ -46,6 +46,7 @@ const ImageUploader = ({ isOpen, onClose }) => {
     } else {
       storeImageLocally(base64Image);
       console.log("No internet. Storing data locally ")
+      alert("No Internet. Storing Image Locally!")
       // const response = await wb.messageSW({type: 'offline'});
     }
   };

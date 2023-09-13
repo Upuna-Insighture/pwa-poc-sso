@@ -17,30 +17,35 @@ importScripts('https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js'
 
 const maxSyncTimer = 600000; //10 min
 const SW_VERSION = '1.0.0';
-let syncState = true;
+let syncState = false;
+let syncing = false;
 let syncTimer = 1000;
 
-// self.addEventListener('message', (event) => {
-//   if (event.data.type === 'GET_VERSION') {
-//     event.ports[0].postMessage(SW_VERSION);
-//   } else if (event.data.type === 'offline'){
-//     syncState = true;
-//     console.log("syncState is now " + syncState)
-//   } 
-// });
+
+function notifyClient(bodyText){
+  self.registration.showNotification('PWAPOC APP', {
+    body: bodyText,
+    icon: 'https://cdn-icons-png.flaticon.com/512/6811/6811839.png'
+  });
+}
 
 self.addEventListener('message', (event) => {
   if (event.data.type === 'GET_VERSION') {
     event.ports[0].postMessage(SW_VERSION);
   } else if (event.data.type === 'offline') {
-    syncState = true;
+    
+    syncMultiple = true;
     console.log("syncState is now 66 " + syncState);
 
-    // Reactivate the setInterval when syncState becomes true
-    intervalId = setInterval(syncDataIfOnline, syncTimer);
+  
+    if(!syncState){
+      console.log("*****************************************************")
+      intervalId = setInterval(syncDataIfOnline, syncTimer);
+    }
+
+    syncState = true;
   } 
 });
-
 
 
 let checkNote = true;
@@ -48,20 +53,9 @@ let checkImage = true;
 
 
 self.addEventListener('install', () => {
-  // Skip over the "waiting" lifecycle state, to ensure that our
-  // new service worker is activated immediately, even if there's
-  // another tab open controlled by our older service worker code.
   self.skipWaiting();
 });
 
-// self.clients.matchAll().then((clients) => {
-//   clients.forEach((client) => {
-//     // Send a message to the client
-//     client.postMessage({ type: 'custom-message', data: 'Hello from the service worker!' });
-//   });
-// });
-
-// Call the custom event function when needed
 
 
 self.addEventListener('activate', event => {
@@ -107,6 +101,8 @@ function syncNotesWithServer() {
     request.onsuccess = async  (e) => {
       const dataToSync = e.target.result;
       if (dataToSync.length > 0) {
+        notifyClient("You have unsynced notes. Syncing...")
+        syncing = true;
         const syncData = async (item) => {
           try {
             const response = await fetch(apiUrl, {
@@ -139,7 +135,6 @@ function syncNotesWithServer() {
       }else {
         console.log("No Notes to be synced :)");
         syncState = false;
-        notifyClient();
       }
     };
   };
@@ -181,6 +176,8 @@ function syncImagesWithServer() {
     request.onsuccess = async  (e) => {
       const dataToSync = e.target.result;
       if (dataToSync.length > 0) {
+        notifyClient("You have unsynced Images. Syncing...")
+        syncing = true;
         const syncData = async (item) => {
           try {
             const response = await fetch(apiUrl, {
@@ -218,6 +215,7 @@ function syncImagesWithServer() {
 }
 
 function increaseSyncTimer() {
+  console.log("incrementing")
   if (syncTimer < maxSyncTimer) {
     syncTimer *= 2; // Double the sync timer value
   } else {
@@ -239,6 +237,10 @@ const syncDataIfOnline = () => {
     console.log("Stopping set Interval")
     clearInterval(intervalId);
     resetSyncTimer();
+    if(syncing){
+      notifyClient("Sync finished!");
+    }
+    syncing = false;
   }
   increaseSyncTimer();
   console.log("Timer is now set to - " + syncTimer);
@@ -254,13 +256,7 @@ self.addEventListener('message', (event) => {
 });
 
 
-function notifyClient(){
-  self.clients.matchAll().then((clients) => {
-    clients.forEach((client) => {
-      client.postMessage({ type: 'data-sync-complete', message: 'Data Sync completed' });
-    });
-  });  
-}
+
 
 
 
