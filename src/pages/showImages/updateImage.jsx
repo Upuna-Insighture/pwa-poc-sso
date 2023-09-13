@@ -58,9 +58,9 @@ const ImageUpdater = ({ isOpen, onClose, data }) => {
           <div>
             {base64Image && (
               <div>
-                <h3>Base64 Encoded Image upater:</h3>
+                <h3 className='text-red-400'>Base64 Encoded Image upater:</h3>
                 {base64Image ? "Uploaded!!!!" : " "}
-                <img src={base64Image} alt="" />
+                <img src={base64Image} width={"100px"} alt="" />
               </div>
             )}
           </div>

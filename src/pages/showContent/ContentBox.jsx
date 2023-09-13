@@ -14,7 +14,7 @@ export function ContentBox(data) {
 
       <EditNote isOpen={edit} onClose={setEdit} data={data} />
 
-      <div className="text-gray-700">{data.data.text}</div>
+      <div className="text-gray-700">{JSON.stringify(data.data.text)}</div>
       <div className="flex justify-end">
         <div onClick={() => setEdit(true)} className="bg-red-300 w-24 rounded p-1 text-center cursor-pointer hover:bg-red-400">Edit</div>
       </div>
