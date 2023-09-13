@@ -14,7 +14,7 @@ const ImagePage = () => {
 
     useEffect(() => {
         // Fetch data from the API
-        fetch('http://localhost:4000/getImages')
+        fetch('https://api-4cx1.onrender.com/getImages')
             .then((response) => {
                 if (response.status === 200) {
                     return response.json();

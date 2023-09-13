@@ -11,7 +11,7 @@ const ShowContent = () => {
     const [tempData, setTempData] = useState([])
 
     useEffect(() => {
-        fetch("http://localhost:4000/getNotes")
+        fetch("https://api-4cx1.onrender.com/getNotes")
           .then((response) => {
             if (!response.ok) {
               throw new Error("Network response was not ok");

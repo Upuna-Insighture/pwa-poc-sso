@@ -16,7 +16,7 @@ export function AddContent({ onCancel, onSave }) {
     if (navigator.onLine) {
 
       try {
-        const response = await fetch('http://localhost:4000/addNote', {
+        const response = await fetch('https://api-4cx1.onrender.com/addNote', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

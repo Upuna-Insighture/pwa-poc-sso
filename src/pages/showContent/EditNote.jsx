@@ -9,7 +9,7 @@ const EditNote = ({ isOpen, onClose, data }) => {
 
   const handleSave = async () => {
     if (navigator.onLine) {
-    fetch('http://localhost:4000/editNote', {
+    fetch('https://api-4cx1.onrender.com/editNote', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

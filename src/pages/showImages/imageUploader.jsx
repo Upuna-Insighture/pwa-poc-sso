@@ -24,7 +24,7 @@ const ImageUploader = ({ isOpen, onClose }) => {
   const handleSave = async () => {
     if (navigator.onLine) {
       try {
-        const response = await fetch('http://localhost:4000/uploadImage', {
+        const response = await fetch('https://api-4cx1.onrender.com/uploadImage', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

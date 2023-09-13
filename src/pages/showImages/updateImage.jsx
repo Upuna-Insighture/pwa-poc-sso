@@ -18,7 +18,7 @@ const ImageUpdater = ({ isOpen, onClose, data }) => {
   const handleSave = async () => {
     if (navigator.onLine) {
 
-      fetch('http://localhost:4000/updateImage', {
+      fetch('https://api-4cx1.onrender.com/updateImage', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

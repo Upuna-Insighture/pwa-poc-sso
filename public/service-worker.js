@@ -67,7 +67,7 @@ self.addEventListener('activate', event => {
 function syncNotesWithServer() {
   const dbName = 'notesDB';
   const objectStoreName = 'notes';
-  const apiUrl = 'http://localhost:4000/addNote'; // API URL
+  const apiUrl = 'https://api-4cx1.onrender.com/addNote'; // API URL
 
   const dbRequest = indexedDB.open(dbName);
 
@@ -144,7 +144,7 @@ function syncImagesWithServer() {
   console.log("image caled!")
   const dbName = 'imagesDB';
   const objectStoreName = 'images';
-  const apiUrl = 'http://localhost:4000/uploadImage'; // API URL
+  const apiUrl = 'https://api-4cx1.onrender.com/uploadImage'; // API URL
 
   const dbRequest = indexedDB.open(dbName);
 
