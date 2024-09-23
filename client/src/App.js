@@ -1,17 +1,17 @@
 import './App.css';
 import { BrowserRouter } from "react-router-dom";
-require('dotenv').config();
 import RouterFile from './routes/route';
 import { useEffect, useState } from "react";
 
 const App = () => {
-  const [user, setUser] = useState(null);
 
-  const authServerUrl = process.env.AUTH_SERVER_URL;
+  const authServerUrl = process.env.REACT_APP_AUTH_SERVER_URL + "auth/login/success";
+
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const getUser = () => {
-      fetch(authServerUrl + "auth/login/success", {
+      fetch(authServerUrl, {
         method: "GET",
         credentials: "include",
         headers: {
