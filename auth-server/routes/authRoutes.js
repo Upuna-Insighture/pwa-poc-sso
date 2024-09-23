@@ -5,7 +5,7 @@ const router = express.Router();
 // Google Auth Routes
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => res.redirect(process.env.CLIENT_URL));
+  (req, res) => res.redirect("https://pwa-poc-sso-client.vercel.app/"));
 
 // GitHub Auth Routes
 router.get('/github', passport.authenticate('github'));
