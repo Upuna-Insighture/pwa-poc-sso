@@ -5,7 +5,7 @@ const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-const authServerUrl = process.env.AUTH_SERVER_URL;
+  const authServerUrl = process.env.REACT_APP_AUTH_SERVER_URL;
   useEffect(() => {
     axios.get(authServerUrl + 'auth/user', { withCredentials: true })
       .then((res) => setUser(res.data))

@@ -1,9 +1,9 @@
 import Github from "./img/github.png";
 
 const GithubLoginButton = () => {
-
+  const authServerUrl = process.env.REACT_APP_AUTH_SERVER_URL;
   const github = () => {
-    window.open("http://localhost:5000/auth/github", "_self");
+    window.open(authServerUrl + "auth/github", "_self");
   };
   
   return (

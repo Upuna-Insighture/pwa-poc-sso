@@ -1,9 +1,9 @@
 import Facebook from "./img/facebook.png";
 
 const FacebookLoginButton = () => {
-
+  const authServerUrl = process.env.REACT_APP_AUTH_SERVER_URL;
   const facebook = () => {
-    window.open("http://localhost:5000/auth/facebook", "_self");
+    window.open(authServerUrl + "auth/facebook", "_self");
   };
   
   return (
