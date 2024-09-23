@@ -27,6 +27,7 @@ const corsOptions = {
 
 // Enable preflight across the board
 app.use(cors(corsOptions));
+app.options('*', cors()); 
 
 // Use CORS only for specific routes, if needed
 app.use('/auth', authRoutes);
