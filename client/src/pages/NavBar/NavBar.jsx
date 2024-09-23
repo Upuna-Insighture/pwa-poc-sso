@@ -39,11 +39,11 @@ const NavBar = () => {
                     <div><Network status={network} /></div>
                     <div><InstallPWA /></div>
                 </div>
-                <div>{user.displayName}</div>
                 {user && (
-                    <div className="logoutButton" onClick={logout}>
-                        Logout
-                    </div>
+                    <ul>
+                        <li>{user.displayName}</li>
+                        <li className="logoutButton" onClick={logout}>Logout</li>
+                    </ul>
                 )}
             </div>
         </>);
