@@ -7,6 +7,13 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // Allow all origins
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 app.use(session({
   maxAge: 24 * 60 * 60 * 1000,
   keys: [process.env.COOKIE_KEY],
@@ -15,21 +22,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({
-    origin: "https://pwa-poc-sso-client.vercel.app",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-);
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://pwa-poc-sso-client.vercel.app');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+// app.use(
+//   cors({
+//     origin: "https://pwa-poc-sso-client.vercel.app",
+//     methods: "GET,POST,PUT,DELETE",
+//     credentials: true,
+//   })
+// );
 
 
 app.use('/auth', authRoutes);
