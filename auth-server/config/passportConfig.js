@@ -20,11 +20,11 @@ passport.use(new GitHubStrategy({
   callbackURL: '/auth/github/callback',
 }, (accessToken, refreshToken, profile, done) => done(null, profile)));
 
-// // Facebook Strategy
-// passport.use(new FacebookStrategy({
-//   clientID: process.env.FACEBOOK_CLIENT_ID,
-//   clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-//   callbackURL: '/auth/facebook/callback',
-// }, (accessToken, refreshToken, profile, done) => done(null, profile)));
+// Facebook Strategy
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_CLIENT_ID,
+  clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+  callbackURL: '/auth/facebook/callback',
+}, (accessToken, refreshToken, profile, done) => done(null, profile)));
 
 module.exports = passport;

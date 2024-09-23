@@ -27,7 +27,7 @@ const NavBar = () => {
     });
 
     const logout = () => {
-        window.open("http://localhost:5000/auth/logout", "_self");
+        window.open(process.env.REACT_APP_AUTH_SERVER_URL + "auth/logout", "_self");
     };
     
     return (
