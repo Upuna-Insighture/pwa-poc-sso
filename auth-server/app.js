@@ -5,7 +5,6 @@ const session = require('cookie-session');
 const passport = require('./config/passportConfig');
 const authRoutes = require('./routes/authRoutes');
 
-
 const app = express();
 
 app.use(session({
@@ -17,24 +16,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const allowedOrigins = [
-  'http://localhost:3000',  
+  'http://localhost:3000', 
+  'http://localhost:5000',  
   'https://pwa-poc-sso-client.vercel.app'  
 ];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: allowedOrigins,
   credentials: true,  
 };
 
+// Enable preflight across the board
 app.use(cors(corsOptions));
 
-app.options('*', cors(corsOptions));
-
+// Use CORS only for specific routes, if needed
 app.use('/auth', authRoutes);
+
+// Start server
 app.listen(5000, () => console.log('Server running on port 5000'));
