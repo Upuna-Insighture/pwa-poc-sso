@@ -7,30 +7,46 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
+// Cookie session setup
 app.use(session({
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: [process.env.COOKIE_KEY],
+  maxAge: 24 * 60 * 60 * 1000, // 24 hours
+  keys: [process.env.COOKIE_KEY], // Secure key for signing the cookie
 }));
 
+// Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Allowed origins
 const allowedOrigins = [
-  "http://localhost:3000",
-  process.env.CLIENT_URL,
+  "http://localhost:3000", // Development
+  process.env.CLIENT_URL,  // Production environment from .env
 ];
 
+// Debugging: Check if CLIENT_URL is loaded correctly
+console.log("Allowed Origins: ", allowedOrigins);
+
 const corsOptions = {
-  origin: allowedOrigins,
-  credentials: true,  
+  origin: function (origin, callback) {
+    // Check if origin is in the allowedOrigins list or if no origin (server-to-server)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // Allow cookies to be sent across domains
 };
 
-// Enable preflight across the board
+// Use CORS globally
 app.use(cors(corsOptions));
-app.options('*', cors()); 
 
-// Use CORS only for specific routes, if needed
+// Enable CORS for preflight requests
+app.options('*', cors(corsOptions));
+
+// Auth routes (CORS will apply here)
 app.use('/auth', authRoutes);
 
 // Start server
-app.listen(5000, () => console.log('Server running on port 5000'));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
