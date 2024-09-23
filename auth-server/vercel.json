@@ -7,7 +7,7 @@
   ],
   "headers": [
     {
-      "source": "/(.*)",  // Applies headers to all routes
+      "source": "/(.*)", 
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
