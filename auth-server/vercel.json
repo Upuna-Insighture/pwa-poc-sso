@@ -1,15 +1,23 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "app.js",
-      "use": "@vercel/node"
+      "source": "/auth/login/success",
+      "destination": "/api/auth/login/success"
     }
   ],
-  "routes": [
+  "headers": [
     {
-      "src": "/(.*)",
-      "dest": "/app.js"
+      "source": "/(.*)",  // Applies headers to all routes
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://pwa-poc-sso-client.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        }
+      ]
     }
   ]
 }
