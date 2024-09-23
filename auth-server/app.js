@@ -17,7 +17,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "https://pwa-poc-sso-client.vercel.app",
+    origin: "*",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
