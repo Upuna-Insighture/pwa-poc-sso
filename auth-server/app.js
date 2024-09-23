@@ -34,5 +34,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+app.options('*', cors(corsOptions));
+
 app.use('/auth', authRoutes);
 app.listen(5000, () => console.log('Server running on port 5000'));
