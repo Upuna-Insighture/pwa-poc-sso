@@ -26,6 +26,10 @@ const NavBar = () => {
         const response = await wb.messageSW({ type: 'resetSync' });
     });
 
+    const logout = () => {
+        window.open("http://localhost:5000/auth/logout", "_self");
+    };
+    
     return (
         <>
             <div className={`bg-red-600/80 w-full h-16 flex justify-center items-center`}>
@@ -34,6 +38,9 @@ const NavBar = () => {
                     <div onClick={() => navigate('upload')} className={` ${colors.mainBHover} cursor-pointer p-2  rounded`}>Show Images</div>
                     <div><Network status={network} /></div>
                     <div><InstallPWA /></div>
+                </div>
+                <div className="logoutButton" onClick={logout}>
+                    Logout
                 </div>
             </div>
         </>);
