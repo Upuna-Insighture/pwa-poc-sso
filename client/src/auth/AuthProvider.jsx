@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     const getUser = () => {
       fetch(authServerUrl, {
         method: "GET",
-        // credentials: "include",
+        credentials: "include",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
