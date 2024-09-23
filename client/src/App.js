@@ -11,7 +11,7 @@ const App = () => {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("https://pwa-poc-sso-server.vercel.app/auth/login/success", {
+      fetch(authServerUrl, {
         method: "GET",
         credentials: "include",
         headers: {
