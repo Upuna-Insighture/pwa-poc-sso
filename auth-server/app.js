@@ -16,13 +16,23 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-);
+const allowedOrigins = [
+  'http://localhost:3000',  
+  'https://pwa-poc-sso-client.vercel.app'  
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,  
+};
+
+app.use(cors(corsOptions));
 
 app.use('/auth', authRoutes);
 app.listen(5000, () => console.log('Server running on port 5000'));
