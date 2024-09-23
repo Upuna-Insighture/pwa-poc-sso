@@ -15,20 +15,14 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const allowedOrigins = [
-  "https://pwa-poc-sso-client.vercel.app/",
-];
+app.use(
+  cors({
+    origin: "https://pwa-poc-sso-client.vercel.app",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 
-const corsOptions = {
-  origin: allowedOrigins,
-  credentials: true,  
-};
-
-// Enable preflight across the board
-app.use(cors(corsOptions));
-
-// Use CORS only for specific routes, if needed
 app.use('/auth', authRoutes);
 
-// Start server
 app.listen(5000, () => console.log('Server running on port 5000'));
