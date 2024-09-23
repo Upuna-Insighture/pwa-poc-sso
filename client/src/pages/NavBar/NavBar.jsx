@@ -4,18 +4,18 @@ import Network from "./Network";
 import { useState } from "react";
 import { Workbox } from "workbox-window";
 import InstallPWA from "./install";
-
+import React, { useContext } from 'react';
+import { AuthContext } from "../../auth/AuthProvider";
 
 
 const NavBar = () => {
+    const { user } = useContext(AuthContext);
     const [network, setNetwork] = useState(navigator.onLine ? "online" : "offline")
     const navigate = useNavigate();
     const [supportsPWA, setSupportsPWA] = useState(false);
     const [promptInstall, setPromptInstall] = useState(null);
     const wb = new Workbox('/service-worker.js');
     wb.register();
-
-  
 
     window.addEventListener('offline', async () => {
         setNetwork('offline')
@@ -39,9 +39,12 @@ const NavBar = () => {
                     <div><Network status={network} /></div>
                     <div><InstallPWA /></div>
                 </div>
-                <div className="logoutButton" onClick={logout}>
-                    Logout
-                </div>
+                <div>{user.displayName}</div>
+                {user && (
+                    <div className="logoutButton" onClick={logout}>
+                        Logout
+                    </div>
+                )}
             </div>
         </>);
 }
