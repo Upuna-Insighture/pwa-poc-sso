@@ -33,6 +33,7 @@ router.get("/login/success", (req, res) => {
       //   cookies: req.cookies
     });
   }
+  res.header('Access-Control-Allow-Origin', '*');
 });
 
 router.get("/login/failed", (req, res) => {
