@@ -36,7 +36,7 @@ const corsOptions = {
 };
 
 // Use CORS globally - make sure this is placed before routes
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // Enable CORS for preflight requests
 app.options('*', cors(corsOptions));
