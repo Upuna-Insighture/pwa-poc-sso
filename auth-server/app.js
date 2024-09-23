@@ -1,6 +1,6 @@
 const dotenv = require('dotenv').config();
 const express = require('express');
-const cors = require("cors");
+const cors = require('cors');
 const session = require('cookie-session');
 const passport = require('./config/passportConfig');
 const authRoutes = require('./routes/authRoutes');
@@ -16,6 +16,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const allowedOrigins = [
+  "http://localhost:3000",
   process.env.CLIENT_URL,
 ];
 
