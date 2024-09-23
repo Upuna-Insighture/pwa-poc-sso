@@ -23,13 +23,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(
-//   cors({
-//     origin: "https://pwa-poc-sso-client.vercel.app",
-//     methods: "GET,POST,PUT,DELETE",
-//     credentials: true,
-//   })
-// );
+app.use(cors({
+  origin: "https://pwa-poc-sso-client.vercel.app", // Allow your client origin
+  credentials: true, // Allow credentials (cookies)
+  methods: "GET,POST,PUT,DELETE", // Specify allowed methods
+  allowedHeaders: ["Content-Type", "Accept"], // Specify allowed headers
+}));
 
 
 app.use('/auth', authRoutes);
