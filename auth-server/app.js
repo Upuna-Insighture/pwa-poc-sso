@@ -16,8 +16,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const allowedOrigins = [
-  'http://localhost:3000', 
-  'https://pwa-poc-sso-client.vercel.app',
+  process.env.CLIENT_URL,
 ];
 
 const corsOptions = {
