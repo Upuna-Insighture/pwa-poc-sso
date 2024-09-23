@@ -20,7 +20,8 @@ app.use(passport.session());
 // Allowed origins
 const allowedOrigins = [
   "http://localhost:3000", // Development
-  process.env.CLIENT_URL,  // Production environment from .env
+  "https://pwa-poc-sso-client.vercel.app"
+  // process.env.CLIENT_URL,  // Production environment from .env
 ];
 
 const corsOptions = {
