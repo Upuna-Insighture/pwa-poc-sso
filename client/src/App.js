@@ -1,14 +1,17 @@
 import './App.css';
 import { BrowserRouter } from "react-router-dom";
+require('dotenv').config();
 import RouterFile from './routes/route';
 import { useEffect, useState } from "react";
 
 const App = () => {
   const [user, setUser] = useState(null);
 
+  const authServerUrl = process.env.AUTH_SERVER_URL;
+
   useEffect(() => {
     const getUser = () => {
-      fetch("http://localhost:5000/auth/login/success", {
+      fetch(authServerUrl + "auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -31,9 +34,6 @@ const App = () => {
     getUser();
   }, []);
 
-  console.log("===================")
-  console.log(user)
-console.log("===================")
   return (
     <BrowserRouter>
       <RouterFile />

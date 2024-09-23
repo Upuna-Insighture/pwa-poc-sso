@@ -1,9 +1,9 @@
 import Google from "./img/google.png";
 
 const GoogleLoginButton = () => {
-
+const authServerUrl = process.env.AUTH_SERVER_URL;
   const google = () => {
-    window.open("http://localhost:5000/auth/google", "_self");
+    window.open(authServerUrl + "auth/google", "_self");
   };
   
   return (
