@@ -22,18 +22,19 @@ router.get('/logout', (req, res) => {
   res.redirect(process.env.CLIENT_URL + 'login');
 });
 
-router.get("/login/success", (req, res) => {
-  console.log("==========================")
-  console.log(req)
+router.get("/login/success", (req, res) => { 
   if (req.user) {
     res.status(200).json({
       success: true,
-      message: "successfull",
+      message: "successful",
       user: req.user,
-      //   cookies: req.cookies
+    });
+  } else {
+    res.status(401).json({
+      success: false,
+      message: "Unauthorized",
     });
   }
-  res.header('Access-Control-Allow-Origin', '*');
 });
 
 router.get("/login/failed", (req, res) => {
