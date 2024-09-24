@@ -24,13 +24,25 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(cors({
-  origin: "https://pwa-poc-sso-client.vercel.app", // Allow your client origin
-  credentials: true, // Allow credentials (cookies)
-  methods: "GET,POST,PUT,DELETE", // Specify allowed methods
-  allowedHeaders: ["Content-Type", "Accept", "Access-Control-Allow-Credentials"], // Specify allowed headers
-}));
+// app.use(cors({
+//   origin: "https://pwa-poc-sso-client.vercel.app", // Allow your client origin
+//   credentials: true, // Allow credentials (cookies)
+//   methods: "GET,POST,PUT,DELETE", // Specify allowed methods
+//   allowedHeaders: ["Content-Type", "Accept", "Access-Control-Allow-Credentials"], // Specify allowed headers
+// }));
 
+const allowedOrigins = ['http://localhost:3000', 'https://pwa-poc-sso-client.vercel.app'];
+
+app.use(cors({
+    credentials: true,
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}));
 
 app.use('/auth', authRoutes);
 
