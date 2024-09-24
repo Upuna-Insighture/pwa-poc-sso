@@ -7,7 +7,6 @@ import InstallPWA from "./install";
 import React, { useContext } from 'react';
 import { AuthContext } from "../../auth/AuthProvider";
 
-
 const NavBar = () => {
     const { user } = useContext(AuthContext);
     const [network, setNetwork] = useState(navigator.onLine ? "online" : "offline")
