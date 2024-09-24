@@ -32,6 +32,7 @@ const AuthProvider = ({ children }) => {
         });
     };
     getUser();
+    
   }, [authServerUrl, navigate]);
 
   return (
