@@ -23,7 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-  origin: "https://pwa-poc-sso-server.vercel.app", // Allow your client origin
+  origin: 'https://pwa-poc-sso-client.vercel.app', // Allow your client origin
   credentials: true, // Allow credentials (cookies)
   methods: "GET,POST,PUT,DELETE", 
   allowedHeaders: ["Content-Type", "Accept", "Access-Control-Allow-Credentials"], // Specify allowed headers
