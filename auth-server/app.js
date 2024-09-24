@@ -28,7 +28,7 @@ app.use(cors({
   origin: "https://pwa-poc-sso-client.vercel.app", // Allow your client origin
   credentials: true, // Allow credentials (cookies)
   methods: "GET,POST,PUT,DELETE", // Specify allowed methods
-  allowedHeaders: ["Content-Type", "Accept", "Access-Control-Allow-Headers"], // Specify allowed headers
+  allowedHeaders: ["Content-Type", "Accept", "Access-Control-Allow-Credentials"], // Specify allowed headers
 }));
 
 
