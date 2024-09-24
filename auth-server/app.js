@@ -7,7 +7,6 @@ const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
-
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // Allow all origins
 //   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -29,7 +28,6 @@ app.use(cors({
   methods: "GET,POST,PUT,DELETE", // Specify allowed methods
   allowedHeaders: ["Content-Type", "Accept", "Access-Control-Allow-Credentials"], // Specify allowed headers
 }));
-
 
 app.use('/auth', authRoutes);
 
