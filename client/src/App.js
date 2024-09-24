@@ -5,11 +5,11 @@ import { AuthProvider } from './auth/AuthProvider';
 
 const App = () => {
   return (
-    <AuthProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <AuthProvider>
         <RouterFile />
-      </BrowserRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </BrowserRouter>   
   );
 };
 
