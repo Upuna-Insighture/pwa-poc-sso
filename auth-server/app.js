@@ -18,7 +18,10 @@ const app = express();
 app.use(session({
   maxAge: 24 * 60 * 60 * 1000,
   keys: [process.env.COOKIE_KEY],
-  sameSite: "None"
+  cookie: {
+    secure: true, // Ensure this is true if using HTTPS
+    sameSite: 'None'
+  }
 }));
 
 app.use(passport.initialize());
