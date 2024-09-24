@@ -39,12 +39,14 @@ const NavBar = () => {
                     <div><Network status={network} /></div>
                     <div><InstallPWA /></div>
                 </div>
-                {user && (
-                    <ul>
-                        <li>{user.displayName}</li>
-                        <li className="logoutButton" onClick={logout}>Logout</li>
-                    </ul>
-                )}
+                <div className="flex text-white gap-4 items-center">
+                    {user && <div>{user.displayName}</div>}
+                    {user && (
+                        <div className="cursor-pointer p-2 rounded bg-gray-800 hover:bg-gray-700" onClick={logout}>
+                            Logout
+                        </div>
+                    )}
+                </div>
             </div>
         </>);
 }

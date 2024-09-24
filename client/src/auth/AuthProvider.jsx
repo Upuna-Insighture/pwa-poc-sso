@@ -4,7 +4,6 @@ const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
   const authServerUrl = process.env.REACT_APP_AUTH_SERVER_URL + "auth/login/success";
-
   const [user, setUser] = useState(null);
 
   useEffect(() => {
