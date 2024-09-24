@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
   const authServerUrl = process.env.REACT_APP_AUTH_SERVER_URL + "auth/login/success";
   const [user, setUser] = useState(null);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     const getUser = () => {
       fetch(authServerUrl, {
@@ -19,17 +21,18 @@ const AuthProvider = ({ children }) => {
       })
         .then((response) => {
           if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
+          navigate("/login");
         })
         .then((resObject) => {
           setUser(resObject.user);
         })
         .catch((err) => {
           console.log(err);
+          navigate("/login");
         });
     };
     getUser();
-  }, []);
+  }, [authServerUrl, navigate]);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
